@@ -11,9 +11,7 @@ var restartButtons = document.getElementsByClassName("restartButton");
 var gameState = "menu";
 var keys = {};
 
-// =========================
-// Images
-// =========================
+
 var imgPlayer = new Image();
 imgPlayer.src = "images/notmario.png";
 
@@ -32,9 +30,7 @@ imgBackground.src = "images/background.jpeg";
 var imgEnemy = new Image();
 imgEnemy.src = "images/enemy.png";
 
-// =========================
-// Game Setup
-// =========================
+
 var gravity = 0.6;
 var maxFallSpeed = 15;
 var moveSpeed = 4;
@@ -50,7 +46,7 @@ var player = {
     jumpStrength: -12
 };
 
-// Platforms
+
 var platforms = [
     { x: 0,   y: 400, w: 800, h: 50 },
     { x: 120, y: 340, w: 120, h: 20 },
@@ -59,13 +55,13 @@ var platforms = [
     { x: 650, y: 320, w: 100, h: 20 }
 ];
 
-// Hazards
+
 var hazards = [
     { x: 260, y: 380, w: 40, h: 20 },
     { x: 440, y: 380, w: 40, h: 20 }
 ];
 
-// Goal
+
 var goal = {
     x: 720,
     y: 260,
@@ -177,7 +173,7 @@ function update() {
         return;
     }
 
-    // Movement
+
     var moveLeft = keys["ArrowLeft"] || keys["KeyA"];
     var moveRight = keys["ArrowRight"] || keys["KeyD"];
 
@@ -192,20 +188,20 @@ function update() {
         }
     }
 
-    // Jump
+
     var jumpPressed = keys["Space"] || keys["ArrowUp"] || keys["KeyW"];
     if (jumpPressed && player.onGround) {
         player.vy = player.jumpStrength;
         player.onGround = false;
     }
 
-    // Gravity
+
     player.vy += gravity;
     if (player.vy > maxFallSpeed) {
         player.vy = maxFallSpeed;
     }
 
-    // Horizontal collision
+
     player.x += player.vx;
     var i;
     for (i = 0; i < platforms.length; i++) {
@@ -220,7 +216,7 @@ function update() {
         }
     }
 
-    // Vertical collision
+
     player.y += player.vy;
     player.onGround = false;
 
@@ -238,7 +234,7 @@ function update() {
         }
     }
 
-    // Enemies: movement + stomp logic
+
     for (i = 0; i < enemies.length; i++) {
         var e = enemies[i];
 
@@ -256,12 +252,10 @@ function update() {
             e.vx *= -1;
         }
 
-        // Player / enemy collision
         if (rectsIntersect(player, e)) {
             var playerBottom = player.y + player.h;
             var enemyTop = e.y;
 
-            // Stomp if coming down from above
             if (player.vy > 0 && playerBottom <= enemyTop + e.h * 0.5) {
                 e.alive = false;
                 player.vy = player.jumpStrength * 0.5;
@@ -273,7 +267,6 @@ function update() {
         }
     }
 
-    // Hazards
     for (i = 0; i < hazards.length; i++) {
         if (rectsIntersect(player, hazards[i])) {
             loseGame();
@@ -281,13 +274,11 @@ function update() {
         }
     }
 
-    // Win condition
     if (rectsIntersect(player, goal)) {
         winGame();
         return;
     }
 
-    // Fall death
     if (player.y > canvas.height + 100) {
         loseGame();
         return;
