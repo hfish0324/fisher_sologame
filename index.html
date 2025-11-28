@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Harrison Fisher">
+    <meta name="description" content="Solog Game: Not Mario | GDS 111-11">
+    <title>Platformer Final Project: "Not Mario"</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="gameWrapper">
+    <canvas id="gameCanvas" width="800" height="450"></canvas>
+
+    
+    <div id="hud">
+        <div>Use A/D or Arrow Keys to move, W/Up/Space to jump</div>
+        <div>Reach the green goal, avoid red hazards.</div>
+    </div>
+
+    
+    <div id="menuScreen" class="screen active">
+        <h1>"Not Mario" by Harrison Fisher</h1>
+        <p>Reach the goal and avoid the hazards.</p>
+        <button id="startButton">Start Game</button>
+        <p class="smallText">Controls: A/D or ←/→ to move, W/↑/Space to jump.</p>
+    </div>
+
+    
+    <div id="winScreen" class="screen">
+        <h1>You Win!</h1>
+        <p>Nice job. Want to play again?</p>
+        <button class="restartButton">Restart</button>
+    </div>
+
+    
+    <div id="loseScreen" class="screen">
+        <h1>Game Over</h1>
+        <p>You touched a spike or fell on it. Try again!</p>
+        <button class="restartButton">Restart</button>
+    </div>
+
+
+    <div id="enemyLoseScreen" class="screen">
+    <h1>Game Over!</h1>
+    <p>The enemy got you! Try again?</p>
+    <button class="restartButton">Restart</button>
+    </div>
+
+</div>
+
+<script src="js/game.js"></script>
+</body>
+</html>
