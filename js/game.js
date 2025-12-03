@@ -390,4 +390,54 @@ for (j = 0; j < restartButtons.length; j++) {
     });
 }
 
+    //used to move the level. WORK IN PROGRESS
+    // var offset = {x:avatar.vx, y:avatar.vy}
+
+    // while(ground.isOverPoint(avatar.bottom()))
+    // {
+    //     avatar.vy = 0;
+    //     avatar.y--;
+    //     offset.y--;
+    //     avatar.canJump = true;
+    // }
+    // while(platform.isOverPoint(avatar.bottom()) && avatar.vy >= 0)
+    // {
+    //     avatar.vy = 0;
+    //     avatar.y--;
+    //     offset.y--;
+    //     avatar.canJump = true;
+    // }
+    // while(wall.isOverPoint(avatar.right()) && avatar.vx >= 0)
+    // {
+    //     avatar.vx = 0;
+    //     avatar.x--;
+    //     offset.x--;
+    // }
+
+    /*-------Level movement threshold----*/
+    //if(avatar.x > 500 || avatar.x < 300)
+    //{
+        //Level movement code
+        //level.x -= offset.x;
+        //avatar.x -= offset.x;
+        //level.y -= offset.y;
+        //avatar.y -= offset.y;
+    //}
+
+    /*----- Camera Code -----------
+        var dx = c.width/2 - avatar.x
+        var dy = c.height/2 - avatar.y
+        
+        level.x += dx*.05; 
+        avatar.x += dx*.05; 
+        level.y += dy*.15; 
+        avatar.y += dy*.15; 
+    //----------------------------*/
+    
+
+    ground.render();
+    platform.render();
+    wall.render();
+    avatar.render();
+
 gameLoop();
