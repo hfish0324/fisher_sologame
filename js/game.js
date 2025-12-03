@@ -435,9 +435,9 @@ for (j = 0; j < restartButtons.length; j++) {
     //----------------------------*/
     
 
-    ground.render();
-    platform.render();
-    wall.render();
-    avatar.render();
+    // ground.render();
+    // platform.render();
+    // wall.render();
+    // avatar.render();
 
 gameLoop();
