@@ -391,53 +391,53 @@ for (j = 0; j < restartButtons.length; j++) {
 }
 
     //used to move the level. WORK IN PROGRESS
-    // var offset = {x:avatar.vx, y:avatar.vy}
+    // var offset = {x:imgPlayer.vx, y:imgPlayer.vy}
 
-    // while(ground.isOverPoint(avatar.bottom()))
+    // while(ground.isOverPoint(imgPlayer.bottom()))
     // {
-    //     avatar.vy = 0;
-    //     avatar.y--;
+    //     imgPlayer.vy = 0;
+    //     imgPlayer.y--;
     //     offset.y--;
-    //     avatar.canJump = true;
+    //     imgPlayer.canJump = true;
     // }
-    // while(platform.isOverPoint(avatar.bottom()) && avatar.vy >= 0)
+    // while(platform.isOverPoint(imgPlayer.bottom()) && imgPlayer.vy >= 0)
     // {
-    //     avatar.vy = 0;
-    //     avatar.y--;
+    //     imgPlayer.vy = 0;
+    //     imgPlayer.y--;
     //     offset.y--;
-    //     avatar.canJump = true;
+    //     imgPlayer.canJump = true;
     // }
-    // while(wall.isOverPoint(avatar.right()) && avatar.vx >= 0)
+    // while(wall.isOverPoint(imgPlayer.right()) && imgPlayer.vx >= 0)
     // {
-    //     avatar.vx = 0;
-    //     avatar.x--;
+    //     imgPlayer.vx = 0;
+    //     imgPlayer.x--;
     //     offset.x--;
     // }
 
     /*-------Level movement threshold----*/
-    //if(avatar.x > 500 || avatar.x < 300)
+    //if(imgPlayer.x > 500 || imgPlayer.x < 300)
     //{
         //Level movement code
         //level.x -= offset.x;
-        //avatar.x -= offset.x;
+        //imgPlayer.x -= offset.x;
         //level.y -= offset.y;
-        //avatar.y -= offset.y;
+        //imgPlayer.y -= offset.y;
     //}
 
     /*----- Camera Code -----------
-        var dx = c.width/2 - avatar.x
-        var dy = c.height/2 - avatar.y
+        var dx = c.width/2 - imgPlayer.x
+        var dy = c.height/2 - imgPlayer.y
         
         level.x += dx*.05; 
-        avatar.x += dx*.05; 
+        imgPlayer.x += dx*.05; 
         level.y += dy*.15; 
-        avatar.y += dy*.15; 
+        imgPlayer.y += dy*.15; 
     //----------------------------*/
     
 
     // ground.render();
     // platform.render();
     // wall.render();
-    // avatar.render();
+    // imgPlayer.render();
 
 gameLoop();
