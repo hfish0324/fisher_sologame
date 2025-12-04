@@ -4,6 +4,7 @@ var ctx = canvas.getContext("2d");
 var menuScreen = document.getElementById("menuScreen");
 var winScreen = document.getElementById("winScreen");
 var loseScreen = document.getElementById("loseScreen");
+var enemyLoseScreen = document.getElementById("enemyLoseScreen");
 var startButton = document.getElementById("startButton");
 var restartButtons = document.getElementsByClassName("restartButton");
 
@@ -29,9 +30,9 @@ imgBackground.src = "images/background.jpeg";
 var imgEnemy = new Image();
 imgEnemy.src = "images/enemy.png";
 
-var gravity = 0.45;
-var maxFallSpeed = 9;
-var moveSpeed = 2;
+var gravity = 0.32;
+var maxFallSpeed = 7;
+var moveSpeed = 1.6;
 
 var player = {
     x: 60,
@@ -58,8 +59,8 @@ var platforms = [
 ];
 
 var hazards = [
-    { x: 260, y: 380, w: 40, h: 20 },
-    { x: 440, y: 380, w: 40, h: 20 }
+    { x: 290, y: 380, w: 40, h: 20 },
+    { x: 560, y: 380, w: 40, h: 20 }
 ];
 
 var goal = {
@@ -104,9 +105,12 @@ function showScreen(screen) {
     menuScreen.classList.remove("active");
     winScreen.classList.remove("active");
     loseScreen.classList.remove("active");
+    if (enemyLoseScreen) enemyLoseScreen.classList.remove("active");
+
     if (screen === "menu") menuScreen.classList.add("active");
     else if (screen === "win") winScreen.classList.add("active");
     else if (screen === "lose") loseScreen.classList.add("active");
+    else if (screen === "enemylose" && enemyLoseScreen) enemyLoseScreen.classList.add("active");
 }
 
 function resetPlayer() {
@@ -141,6 +145,11 @@ function winGame() {
 function loseGame() {
     gameState = "lost";
     showScreen("lose");
+}
+
+function enemyLoseGame() {
+    gameState = "lost";
+    showScreen("enemylose");
 }
 
 function restartGame() {
@@ -180,6 +189,10 @@ function update() {
     var i;
     for (i = 0; i < platforms.length; i++) {
         var p = platforms[i];
+        var isOneWayPlatform = (i > 0 && i < 5);
+
+        if (isOneWayPlatform) continue;
+
         if (rectsIntersect(player, p)) {
             if (player.vx > 0) player.x = p.x - player.w;
             else if (player.vx < 0) player.x = p.x + p.w;
@@ -190,20 +203,25 @@ function update() {
     if (player.x < 0) player.x = 0;
     if (player.x + player.w > levelWidth) player.x = levelWidth - player.w;
 
+    var prevY = player.y;
+    var prevBottom = prevY + player.h;
+
     player.y += player.vy;
     player.onGround = false;
 
+    var currBottom = player.y + player.h;
+
     for (i = 0; i < platforms.length; i++) {
         var p2 = platforms[i];
-        if (rectsIntersect(player, p2)) {
-            if (player.vy > 0) {
+        if (!rectsIntersect(player, p2)) continue;
+
+        if (player.vy > 0) {
+            if (prevBottom <= p2.y && currBottom >= p2.y) {
                 player.y = p2.y - player.h;
                 player.vy = 0;
                 player.onGround = true;
-            } else if (player.vy < 0) {
-                player.y = p2.y + p2.h;
-                player.vy = 0;
             }
+        } else if (player.vy < 0) {
         }
     }
 
@@ -226,7 +244,7 @@ function update() {
                 e.alive = false;
                 player.vy = player.jumpStrength * 0.5;
             } else {
-                loseGame();
+                enemyLoseGame();
                 return;
             }
         }
