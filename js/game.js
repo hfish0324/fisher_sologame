@@ -32,7 +32,7 @@ imgEnemy.src = "images/enemy.png";
 
 var gravity = 0.32;
 var maxFallSpeed = 7;
-var moveSpeed = 1.6;
+var moveSpeed = 3;
 
 var player = {
     x: 60,
